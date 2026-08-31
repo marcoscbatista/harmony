@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Harmony
+Exec=harmony
+Icon=com.marcoscbatista.harmony
+Terminal=false
+Type=Application
+Categories=Utility;
+Keywords=GTK;
+StartupNotify=true
+DBusActivatable=true

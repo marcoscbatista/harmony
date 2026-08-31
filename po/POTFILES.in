@@ -1,0 +1,8 @@
+# List of source files containing translatable strings.
+# Please keep this file sorted alphabetically.
+data/com.marcoscbatista.harmony.desktop.in
+data/com.marcoscbatista.harmony.metainfo.xml.in
+data/com.marcoscbatista.harmony.gschema.xml
+src/main.c
+src/harmony-window.c
+src/harmony-window.ui
