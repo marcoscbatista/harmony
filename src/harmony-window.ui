@@ -47,7 +47,7 @@
               <child>
                 <object class="GtkLabel" id="color_label">
                 <property name="halign">center</property>
-                  <property name="label"></property>
+                  <property name="label"/>
                   <style>
                     <class name="title-3"/>
                   </style>

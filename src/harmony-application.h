@@ -24,11 +24,12 @@
 
 G_BEGIN_DECLS
 
-#define HARMONY_TYPE_APPLICATION (harmony_application_get_type())
+#define HARMONY_TYPE_APPLICATION (harmony_application_get_type ())
 
 G_DECLARE_FINAL_TYPE (HarmonyApplication, harmony_application, HARMONY, APPLICATION, AdwApplication)
 
-HarmonyApplication *harmony_application_new (const char        *application_id,
-                                                    GApplicationFlags  flags);
+HarmonyApplication *harmony_application_new (const char *application_id,
+                                                    GApplicationFlags flags);
 
 G_END_DECLS
+

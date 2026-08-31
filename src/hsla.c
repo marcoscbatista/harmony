@@ -16,10 +16,10 @@ shift_hue (HSLA color, float degrees)
 HSLA
 gdk_rgba_to_hsla (GdkRGBA rgba)
 {
-  float r = (float)rgba.red;
-  float g = (float)rgba.green;
-  float b = (float)rgba.blue;
-  float a = (float)rgba.alpha;
+  float r = (float) rgba.red;
+  float g = (float) rgba.green;
+  float b = (float) rgba.blue;
+  float a = (float) rgba.alpha;
 
   float max = fmaxf (r, fmaxf (g, b));
   float min = fminf (r, fminf (g, b));

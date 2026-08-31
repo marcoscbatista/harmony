@@ -20,13 +20,14 @@
 
 #pragma once
 
-#include <adwaita.h>
 #include "hsla.h"
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
-#define HARMONY_TYPE_WINDOW (harmony_window_get_type())
+#define HARMONY_TYPE_WINDOW (harmony_window_get_type ())
 
 G_DECLARE_FINAL_TYPE (HarmonyWindow, harmony_window, HARMONY, WINDOW, AdwApplicationWindow)
 
 G_END_DECLS
+
