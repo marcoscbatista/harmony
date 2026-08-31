@@ -19,6 +19,7 @@
  */
 
 #include "config.h"
+#include <widgets/harmony-wheel.h>
 
 #include "harmony-window.h"
 #include "hsla.h"
@@ -31,6 +32,7 @@ struct _HarmonyWindow
   GtkLabel *primary_title;
   GtkLabel *color_label;
   GtkColorButton *picker_button;
+  GtkBox *main_box;
 };
 
 G_DEFINE_FINAL_TYPE (HarmonyWindow, harmony_window, ADW_TYPE_APPLICATION_WINDOW)
@@ -44,6 +46,7 @@ harmony_window_class_init (HarmonyWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, HarmonyWindow, primary_title);
   gtk_widget_class_bind_template_child (widget_class, HarmonyWindow, color_label);
   gtk_widget_class_bind_template_child (widget_class, HarmonyWindow, picker_button);
+  gtk_widget_class_bind_template_child (widget_class, HarmonyWindow, main_box);
 }
 
 static void
@@ -52,6 +55,7 @@ on_color_changed (GtkColorDialogButton *button,
                   gpointer user_data)
 {
   const GdkRGBA *rgba = gtk_color_dialog_button_get_rgba (button);
+  HarmonyWheel *color_wheel = HARMONY_WHEEL (user_data);
   HSLA hsla = gdk_rgba_to_hsla (*rgba);
   ColorPallete complementary = hsla_get_complementary_color (&hsla);
   g_print ("HSLA  : %.2f, %.2f, %.2f, %.2f\n",
@@ -65,13 +69,25 @@ on_color_changed (GtkColorDialogButton *button,
            complementary.colors[1].s,
            complementary.colors[1].l,
            complementary.colors[1].a);
+  harmony_wheel_set_color (color_wheel, complementary.colors[1]);
   // gtk_label_set_label (GtkLabel *self, const char *str)
 }
 
 static void
 harmony_window_init (HarmonyWindow *self)
 {
+
   gtk_widget_init_template (GTK_WIDGET (self));
-  g_signal_connect (self->picker_button, "notify::rgba", G_CALLBACK (on_color_changed), NULL);
+  HarmonyWheel *wheel = harmony_wheel_new ();
+
+  gtk_widget_set_size_request (
+      GTK_WIDGET (wheel),
+      200,
+      200);
+
+  gtk_box_append (
+      GTK_BOX (self->main_box),
+      GTK_WIDGET (wheel));
+  g_signal_connect (self->picker_button, "notify::rgba", G_CALLBACK (on_color_changed), wheel);
 }
 

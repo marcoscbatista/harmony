@@ -5,16 +5,16 @@
 
 #define COLOR_PALLETE_MAX 8
 
-
-
-typedef struct {
+typedef struct
+{
   float h;
   float s;
   float l;
   float a;
 } HSLA;
 
-typedef struct {
+typedef struct
+{
   HSLA colors[COLOR_PALLETE_MAX];
   guint count;
 } ColorPallete;
@@ -22,4 +22,9 @@ HSLA gdk_rgba_to_hsla (GdkRGBA rgba);
 
 ColorPallete hsla_get_complementary_color (HSLA *base_color);
 
+ColorPallete hsla_get_square_colors (HSLA *base_color);
+
+ColorPallete hsla_get_triade_colors (HSLA *base_color);
+
 #endif
+
