@@ -2,6 +2,7 @@
 <interface>
   <requires lib="gtk" version="4.0"/>
   <requires lib="Adw" version="1.0"/>
+
   <template class="HarmonyWindow" parent="AdwApplicationWindow">
     <property name="title" translatable="yes">Harmony</property>
     <property name="default-width">800</property>
@@ -20,45 +21,74 @@
             </child>
           </object>
         </child>
-        <property name="content">
-            <object class="GtkBox" id="main_box">
-              <property name="orientation">vertical</property>
-              <property name="spacing">12</property>
-              <property name="valign">center</property>
-              <property name="halign">center</property>
-              <child>
-                <object class="GtkLabel" id="primary_title">
-                  <property name="label" translatable="yes">Color Picker</property>
-                  <style>
-                    <class name="title-1"/>
-                  </style>
-                </object>
-              </child>
-              <child>
-                <object class="GtkColorDialogButton" id="picker_button">
-                  <property name="halign">center</property>
-                  <property name="dialog">
-                    <object class="GtkColorDialog">
-                        <property name="with-alpha">True</property>
-                    </object>
-                  </property>
-                </object>
-              </child>
-              <child>
-                <object class="GtkLabel" id="color_label">
-                <property name="halign">center</property>
-                  <property name="label"/>
-                  <style>
-                    <class name="title-3"/>
-                  </style>
-                </object>
-              </child>
 
-            </object>
+        <property name="content">
+          <object class="GtkBox" id="main_box">
+            <property name="orientation">vertical</property>
+            <property name="spacing">12</property>
+            <property name="valign">center</property>
+            <property name="halign">center</property>
+
+            <child>
+              <object class="GtkLabel" id="primary_title">
+                <property name="label" translatable="yes">Color Picker</property>
+                <style>
+                  <class name="title-1"/>
+                </style>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">horizontal</property>
+                <property name="spacing">12</property>
+                <property name="valign">center</property>
+                <property name="halign">center</property>
+
+                <child>
+                  <object class="GtkDropDown" id="harmony_drop_down">
+                    <property name="model">
+                      <object class="GtkStringList">
+                        <items>
+                          <item translatable="yes">Complementary</item>
+                          <item translatable="yes">Triadic</item>
+                          <item translatable="yes">Square</item>
+                        </items>
+                      </object>
+                    </property>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkColorDialogButton" id="picker_button">
+                    <property name="halign">center</property>
+                    <property name="dialog">
+                      <object class="GtkColorDialog">
+                        <property name="with-alpha">True</property>
+                      </object>
+                    </property>
+                  </object>
+                </child>
+
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkLabel" id="color_label">
+                <property name="halign">center</property>
+                <property name="label"/>
+                <style>
+                  <class name="title-3"/>
+                </style>
+              </object>
+            </child>
+
+          </object>
         </property>
       </object>
     </property>
   </template>
+
   <menu id="primary_menu">
     <section>
       <item>
@@ -76,4 +106,3 @@
     </section>
   </menu>
 </interface>
-
