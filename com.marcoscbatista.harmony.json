@@ -1,5 +1,5 @@
 {
-    "id" : "com.marcoscbatista.harmony",
+    "id" : "io.github.marcoscbatista.harmony",
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "50",
     "sdk" : "org.gnome.Sdk",
