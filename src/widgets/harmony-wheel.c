@@ -226,14 +226,21 @@ save_color_in_clipboard (GtkWidget *self, HSLA color)
   GdkDisplay *display = gtk_widget_get_display (GTK_WIDGET (self));
   GdkClipboard *clipboard = gtk_widget_get_clipboard (self);
   GdkRGBA rgba_color = hue_to_gdk_rgba (color);
+  char *hex_string;
 
-  if a
+  int r = (int) round (rgba_color.red * 255.0);
+  int g = (int) round (rgba_color.green * 255.0);
+  int b = (int) round (rgba_color.blue * 255.0);
+  int a = (int) round (rgba_color.alpha * 255.0);
 
-  char *hex_string = g_strdup_printf ("#%02X%02X%02X%02X",
-                                      (int) round (rgba_color.red * 255.0),
-                                      (int) round (rgba_color.green * 255.0),
-                                      (int) round (rgba_color.blue * 255.0),
-                                      (int) round (rgba_color.alpha * 255.0));
+  if (a == 255)
+    {
+      hex_string = g_strdup_printf ("#%02X%02X%02X", r, g, b);
+    }
+  else
+    {
+      hex_string = g_strdup_printf ("#%02X%02X%02X%02X", r, g, b, a);
+    }
 
   gdk_clipboard_set_text (clipboard, hex_string);
   g_free (hex_string);
