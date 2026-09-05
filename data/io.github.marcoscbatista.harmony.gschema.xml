@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="harmony">
-	<schema id="com.marcoscbatista.harmony" path="/com/marcoscbatista/harmony/">
+	<schema id="io.github.marcoscbatista.harmony" path="/io/github/marcoscbatista/harmony/">
 	</schema>
 </schemalist>

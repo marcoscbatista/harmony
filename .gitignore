@@ -64,6 +64,7 @@ src/resources.c
 .buildconfig
 .flatpak-builder/
 /.builder/
+repo/
 
 
 # debug information files

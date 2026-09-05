@@ -1,3 +1,3 @@
 [D-BUS Service]
-Name=com.marcoscbatista.harmony
+Name=io.github.marcoscbatista.harmony
 Exec=@bindir@/harmony --gapplication-service

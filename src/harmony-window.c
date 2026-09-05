@@ -94,7 +94,7 @@ harmony_window_class_init (HarmonyWindowClass *klass)
 
   gtk_widget_class_set_template_from_resource (
       widget_class,
-      "/com/marcoscbatista/harmony/harmony-window.ui");
+      "/io/github/marcoscbatista/harmony/harmony-window.ui");
 
   gtk_widget_class_bind_template_child (
       widget_class,
@@ -140,4 +140,3 @@ harmony_window_init (HarmonyWindow *self)
 
   update_color_wheel_palette (self);
 }
-
