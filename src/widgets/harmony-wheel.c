@@ -284,7 +284,7 @@ on_click_pressed (GtkGestureClick *gesture,
     {
       index = self->palette.count - 1;
     }
-  g_print ("Clicked slice: %d | Cor HSL: h=%.1f s=%.1f l=%.1f\n",
+  g_print ("Clicked slice: %d | HSL: h=%.1f s=%.1f l=%.1f\n",
            index,
            self->palette.colors[index].h,
            self->palette.colors[index].s,
@@ -326,6 +326,7 @@ static void
 harmony_wheel_init (
     HarmonyWheel *self)
 {
+  gtk_widget_set_cursor_from_name (GTK_WIDGET (self), "pointer");
   GtkGesture *gesture = gtk_gesture_click_new ();
   gtk_gesture_single_set_button (GTK_GESTURE_SINGLE (gesture), GDK_BUTTON_PRIMARY);
   g_signal_connect (gesture, "pressed", G_CALLBACK (on_click_pressed), self);
