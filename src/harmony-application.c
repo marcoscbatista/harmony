@@ -40,7 +40,7 @@ harmony_application_new (const char *application_id,
   return g_object_new (HARMONY_TYPE_APPLICATION,
                        "application-id", application_id,
                        "flags", flags,
-                       "resource-base-path", "/com/marcoscbatista/harmony",
+                       "resource-base-path", "/io/github/marcoscbatista/harmony",
                        NULL);
 }
 
@@ -84,7 +84,7 @@ harmony_application_about_action (GSimpleAction *action,
 
   adw_show_about_dialog (GTK_WIDGET (window),
                          "application-name", "Harmony",
-                         "application-icon", "com.marcoscbatista.harmony",
+                         "application-icon", "io.github.marcoscbatista.harmony",
                          "developer-name", "Marcos Coelho",
                          "translator-credits", _ ("translator-credits"),
                          "version", "0.1.0",
@@ -121,4 +121,3 @@ harmony_application_init (HarmonyApplication *self)
                                          "app.quit",
                                          (const char *[]) { "<control>q", NULL });
 }
-

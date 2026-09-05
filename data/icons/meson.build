@@ -1,4 +1,4 @@
-application_id = 'com.marcoscbatista.harmony'
+application_id = 'io.github.marcoscbatista.harmony'
 
 scalable_dir = 'hicolor' / 'scalable' / 'apps'
 install_data(

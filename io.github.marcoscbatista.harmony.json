@@ -1,5 +1,5 @@
 {
-    "id" : "com.marcoscbatista.harmony",
+    "id" : "io.github.marcoscbatista.harmony",
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "50",
     "sdk" : "org.gnome.Sdk",
@@ -31,7 +31,8 @@
                 {
                     "type" : "git",
                     "url" : "https://github.com/marcoscbatista/harmony.git",
-                    "tag" : "0.1.0"
+                    "tag" : "0.1.0",
+                    "commit" : "77ac27273adf8d642190751e025da7d01fc815e0"
                 }
             ]
         }

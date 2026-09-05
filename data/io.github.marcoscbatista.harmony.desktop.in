@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Harmony
 Exec=harmony
-Icon=com.marcoscbatista.harmony
+Icon=io.github.marcoscbatista.harmony
 Terminal=false
 Type=Application
 Categories=Utility;
