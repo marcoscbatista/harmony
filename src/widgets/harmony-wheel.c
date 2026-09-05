@@ -262,7 +262,7 @@ harmony_wheel_set_palette (
     ColorPallete palette)
 {
   g_return_if_fail (
-      GNOME_IS_COLOR_WHEEL (self));
+      HARMONY_IS_WHEEL (self));
 
   self->palette = palette;
 
@@ -275,7 +275,7 @@ harmony_wheel_get_palette (
     HarmonyWheel *self)
 {
   g_return_val_if_fail (
-      GNOME_IS_COLOR_WHEEL (self),
+      HARMONY_IS_WHEEL (self),
       (ColorPallete) { 0 });
 
   return self->palette;
@@ -285,7 +285,6 @@ HarmonyWheel *
 harmony_wheel_new (void)
 {
   return g_object_new (
-      GNOME_TYPE_COLOR_WHEEL,
+      HARMONY_TYPE_WHEEL,
       NULL);
 }
-

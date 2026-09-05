@@ -4,13 +4,13 @@
 
 #include "hsla.h"
 
-#define GNOME_TYPE_COLOR_WHEEL (harmony_wheel_get_type ())
+#define HARMONY_TYPE_WHEEL (harmony_wheel_get_type ())
 
 G_DECLARE_FINAL_TYPE (
     HarmonyWheel,
     harmony_wheel,
-    GNOME,
-    COLOR_WHEEL,
+    HARMONY,
+    WHEEL,
     GtkWidget)
 
 HarmonyWheel *harmony_wheel_new (void);
@@ -23,4 +23,3 @@ harmony_wheel_set_palette (
 ColorPallete
 harmony_wheel_get_palette (
     HarmonyWheel *self);
-
