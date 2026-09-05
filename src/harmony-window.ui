@@ -41,7 +41,6 @@
                     <child>
                       <object class="AdwActionRow">
                         <property name="title" translatable="yes">Base Color</property>
-                        <property name="subtitle" translatable="yes">Select the seed color for harmony</property>
                         <child type="suffix">
                           <object class="GtkColorDialogButton" id="picker_button">
                             <property name="valign">center</property>
