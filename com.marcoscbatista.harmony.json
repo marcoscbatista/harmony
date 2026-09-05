@@ -30,7 +30,8 @@
             "sources" : [
                 {
                     "type" : "git",
-                    "url" : "file:///home/YOU_USER/Projects"
+                    "url" : "https://github.com/marcoscbatista/harmony.git",
+                    "tag" : "0.1.0"
                 }
             ]
         }
