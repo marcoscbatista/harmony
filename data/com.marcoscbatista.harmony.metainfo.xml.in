@@ -10,21 +10,15 @@
     <p>Explore relationships between colors with an interactive color harmony wheel. Choose a base color and discover complementary, triadic, and square harmonies.</p>
     <p>Click a color in the wheel to copy its HEX value to the clipboard.</p>
   </description>
-  <developer id="tld.vendor">
+  <developer>
     <name>Marcos Coelho</name>
   </developer>
 
-  <!-- Required: Should be a link to the upstream homepage for the component -->
   <url type="homepage">https://github.com/marcoscbatista/harmony</url>
-  <!-- Recommended: It is highly recommended for open-source projects to display the source code repository -->
   <url type="vcs-browser">https://github.com/marcoscbatista/harmony</url>
-  <!-- Should point to the software's bug tracking system, for users to report new bugs -->
-  <url type="bugtracker">https://github.com/marcoscbatista/issues</url>
-  <!-- URLs of this type should point to a webpage where users can submit or modify translations of the upstream project -->
+  <url type="bugtracker">https://github.com/marcoscbatista/harmony/issues</url>
   <url type="help">https://github.com/marcoscbatista/harmony#readme</url>
-    <!-- URLs of this type should point to a webpage showing information on how to donate to the described software project -->
   <url type="contact">https://github.com/marcoscbatista/harmony/issues</url>
-    <!-- URLs of this type should point to a webpage showing information on how to contribute to the described software project -->
 
   <translation type="gettext">harmony</translation>
   <!-- All graphical applications having a desktop file must have this tag in the MetaInfo.
@@ -42,7 +36,7 @@
   <screenshots>
     <screenshot type="default">
       <image>https://raw.githubusercontent.com/marcoscbatista/harmony/main/screenshot.png</image>
-      <caption>A app screenshot</caption>
+      <caption>Harmony displaying a complementary color palette</caption>
     </screenshot>
   </screenshots>
 
