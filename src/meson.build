@@ -3,7 +3,7 @@ harmony_sources = [
   'harmony-application.c',
   'harmony-window.c',
   'hsla.c',
-  'widgets/harmony-wheel.c',
+  'widgets/harmony-color-wheel.c',
 ]
 
 math_dep = meson.get_compiler('c').find_library('m', required: true)

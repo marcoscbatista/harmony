@@ -31,3 +31,4 @@ G_DECLARE_FINAL_TYPE (HarmonyWindow, harmony_window, HARMONY, WINDOW, AdwApplica
 
 G_END_DECLS
 
+
