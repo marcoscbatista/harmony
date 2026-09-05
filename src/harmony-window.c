@@ -31,6 +31,7 @@ struct _HarmonyWindow
   AdwComboRow *harmony_combo_row;
   GtkBox *wheel_container;
   HarmonyWheel *wheel;
+  AdwToastOverlay *toast_overlay;
 };
 
 G_DEFINE_FINAL_TYPE (
@@ -109,6 +110,11 @@ harmony_window_class_init (HarmonyWindowClass *klass)
       widget_class,
       HarmonyWindow,
       wheel_container);
+
+  gtk_widget_class_bind_template_child (
+      widget_class,
+      HarmonyWindow,
+      toast_overlay);
 }
 
 static void
@@ -134,3 +140,4 @@ harmony_window_init (HarmonyWindow *self)
 
   update_color_wheel_palette (self);
 }
+

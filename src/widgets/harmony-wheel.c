@@ -223,15 +223,23 @@ harmony_wheel_snapshot (GtkWidget *widget,
 static void
 save_color_in_clipboard (GtkWidget *self, HSLA color)
 {
-  GdkDisplay *display = gtk_widget_get_display (GTK_WIDGET (self));
-  GdkClipboard *clipboard = gtk_widget_get_clipboard (self);
-  GdkRGBA rgba_color = hue_to_gdk_rgba (color);
+  GdkDisplay *display;
+  GdkClipboard *clipboard;
+  GdkRGBA rgba_color;
   char *hex_string;
+  int r, g, b, a;
 
-  int r = (int) round (rgba_color.red * 255.0);
-  int g = (int) round (rgba_color.green * 255.0);
-  int b = (int) round (rgba_color.blue * 255.0);
-  int a = (int) round (rgba_color.alpha * 255.0);
+  GtkWidget *toast_overlay;
+  AdwToast *toast;
+
+  display = gtk_widget_get_display (GTK_WIDGET (self));
+  clipboard = gdk_display_get_clipboard (display); /* Ajustado para receber o display */
+  rgba_color = hue_to_gdk_rgba (color);
+
+  r = (int) round (rgba_color.red * 255.0);
+  g = (int) round (rgba_color.green * 255.0);
+  b = (int) round (rgba_color.blue * 255.0);
+  a = (int) round (rgba_color.alpha * 255.0);
 
   if (a == 255)
     {
@@ -243,6 +251,16 @@ save_color_in_clipboard (GtkWidget *self, HSLA color)
     }
 
   gdk_clipboard_set_text (clipboard, hex_string);
+
+  toast_overlay = gtk_widget_get_ancestor (GTK_WIDGET (self), adw_toast_overlay_get_type ());
+
+  if (toast_overlay != NULL)
+    {
+      toast = adw_toast_new ("Copy to clipboard!");
+      adw_toast_set_timeout (toast, 1.5);
+      adw_toast_overlay_add_toast (ADW_TOAST_OVERLAY (toast_overlay), toast);
+    }
+
   g_free (hex_string);
 }
 

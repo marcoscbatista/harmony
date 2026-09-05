@@ -1,6 +1,7 @@
 #pragma once
 
 #include <gtk/gtk.h>
+#include <adwaita.h>
 
 #include "hsla.h"
 
