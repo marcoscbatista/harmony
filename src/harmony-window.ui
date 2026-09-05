@@ -4,9 +4,10 @@
   <requires lib="Adw" version="1.0"/>
 
   <template class="HarmonyWindow" parent="AdwApplicationWindow">
-    <property name="title" translatable="yes">Harmony</property>
-    <property name="default-width">800</property>
-    <property name="default-height">600</property>
+    <property name="title" translatable="yes">Color Harmony</property>
+    <property name="default-width">300</property>
+    <property name="default-height">350</property>
+
     <property name="content">
       <object class="AdwToolbarView">
         <child type="top">
@@ -23,66 +24,65 @@
         </child>
 
         <property name="content">
-          <object class="GtkBox" id="main_box">
-            <property name="orientation">vertical</property>
-            <property name="spacing">12</property>
-            <property name="valign">center</property>
-            <property name="halign">center</property>
-
+          <object class="AdwClamp">
+            <property name="maximum-size">500</property>
+            <property name="tightening-threshold">400</property>
             <child>
-              <object class="GtkLabel" id="primary_title">
-                <property name="label" translatable="yes">Color Picker</property>
-                <style>
-                  <class name="title-1"/>
-                </style>
-              </object>
-            </child>
-
-            <child>
-              <object class="GtkBox">
-                <property name="orientation">horizontal</property>
-                <property name="spacing">12</property>
-                <property name="valign">center</property>
-                <property name="halign">center</property>
-
+              <object class="GtkBox" id="main_box">
+                <property name="orientation">vertical</property>
+                <property name="spacing">24</property>
+                <property name="margin-top">24</property>
+                <property name="margin-bottom">24</property>
+                <property name="margin-start">12</property>
+                <property name="margin-end">12</property>
                 <child>
-                  <object class="GtkDropDown" id="harmony_drop_down">
-                    <property name="model">
-                      <object class="GtkStringList">
-                        <items>
-                          <item translatable="yes">Complementary</item>
-                          <item translatable="yes">Triadic</item>
-                          <item translatable="yes">Square</item>
-                        </items>
+                  <object class="AdwPreferencesGroup">
+
+                    <child>
+                      <object class="AdwActionRow">
+                        <property name="title" translatable="yes">Base Color</property>
+                        <property name="subtitle" translatable="yes">Select the seed color for harmony</property>
+                        <child type="suffix">
+                          <object class="GtkColorDialogButton" id="picker_button">
+                            <property name="valign">center</property>
+                            <property name="dialog">
+                              <object class="GtkColorDialog">
+                                <property name="with-alpha">True</property>
+                              </object>
+                            </property>
+                          </object>
+                        </child>
                       </object>
-                    </property>
+                    </child>
+
+                    <child>
+                      <object class="AdwComboRow" id="harmony_combo_row">
+                        <property name="title" translatable="yes">Harmony Type</property>
+                        <property name="model">
+                          <object class="GtkStringList">
+                            <items>
+                              <item translatable="yes">Complementary</item>
+                              <item translatable="yes">Triadic</item>
+                              <item translatable="yes">Square</item>
+                            </items>
+                          </object>
+                        </property>
+                      </object>
+                    </child>
                   </object>
                 </child>
 
                 <child>
-                  <object class="GtkColorDialogButton" id="picker_button">
+                  <object class="GtkBox" id="wheel_container">
+                    <property name="orientation">vertical</property>
                     <property name="halign">center</property>
-                    <property name="dialog">
-                      <object class="GtkColorDialog">
-                        <property name="with-alpha">True</property>
-                      </object>
-                    </property>
+                    <property name="valign">center</property>
+                    <property name="spacing">12</property>
                   </object>
                 </child>
 
               </object>
             </child>
-
-            <child>
-              <object class="GtkLabel" id="color_label">
-                <property name="halign">center</property>
-                <property name="label"/>
-                <style>
-                  <class name="title-3"/>
-                </style>
-              </object>
-            </child>
-
           </object>
         </property>
       </object>
@@ -92,12 +92,8 @@
   <menu id="primary_menu">
     <section>
       <item>
-        <attribute name="label" translatable="yes">_Preferences</attribute>
-        <attribute name="action">app.preferences</attribute>
-      </item>
-      <item>
         <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
-        <attribute name="action">app.shortcuts</attribute>
+        <attribute name="action">win.show-help-overlay</attribute>
       </item>
       <item>
         <attribute name="label" translatable="yes">_About Harmony</attribute>

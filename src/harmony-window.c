@@ -17,11 +17,9 @@
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
-
 #include "config.h"
 
 #include <widgets/harmony-wheel.h>
-
 #include "harmony-window.h"
 #include "hsla.h"
 
@@ -29,11 +27,9 @@ struct _HarmonyWindow
 {
   AdwApplicationWindow parent_instance;
 
-  GtkLabel *primary_title;
-  GtkLabel *color_label;
   GtkColorDialogButton *picker_button;
-  GtkBox *main_box;
-  GtkDropDown *harmony_drop_down;
+  AdwComboRow *harmony_combo_row;
+  GtkBox *wheel_container;
   HarmonyWheel *wheel;
 };
 
@@ -46,7 +42,10 @@ static void
 update_color_wheel_palette (HarmonyWindow *self)
 {
   const GdkRGBA *rgba = gtk_color_dialog_button_get_rgba (self->picker_button);
-  guint selected_harmony = gtk_drop_down_get_selected (self->harmony_drop_down);
+  guint selected_harmony = adw_combo_row_get_selected (self->harmony_combo_row);
+
+  if (rgba == NULL)
+    return;
 
   HSLA hsla = gdk_rgba_to_hsla (*rgba);
   ColorPallete palette;
@@ -56,14 +55,14 @@ update_color_wheel_palette (HarmonyWindow *self)
     case 0:
       palette = hsla_get_complementary_color (&hsla);
       break;
-      
     case 1:
       palette = hsla_get_triade_colors (&hsla);
       break;
     case 2:
       palette = hsla_get_square_colors (&hsla);
       break;
-    break;
+    default:
+      g_assert_not_reached ();
     }
 
   harmony_wheel_set_palette (self->wheel, palette);
@@ -71,17 +70,17 @@ update_color_wheel_palette (HarmonyWindow *self)
 
 static void
 on_color_changed (GtkColorDialogButton *button,
-                  GParamSpec *pspec,
-                  gpointer user_data)
+                  GParamSpec           *pspec,
+                  gpointer              user_data)
 {
   HarmonyWindow *self = HARMONY_WINDOW (user_data);
   update_color_wheel_palette (self);
 }
 
 static void
-on_harmony_changed (GtkDropDown *drop_down,
-                    GParamSpec *pspec,
-                    gpointer user_data)
+on_harmony_changed (AdwComboRow *combo_row,
+                    GParamSpec  *pspec,
+                    gpointer     user_data)
 {
   HarmonyWindow *self = HARMONY_WINDOW (user_data);
   update_color_wheel_palette (self);
@@ -99,27 +98,17 @@ harmony_window_class_init (HarmonyWindowClass *klass)
   gtk_widget_class_bind_template_child (
       widget_class,
       HarmonyWindow,
-      primary_title);
-
-  gtk_widget_class_bind_template_child (
-      widget_class,
-      HarmonyWindow,
-      color_label);
-
-  gtk_widget_class_bind_template_child (
-      widget_class,
-      HarmonyWindow,
       picker_button);
 
   gtk_widget_class_bind_template_child (
       widget_class,
       HarmonyWindow,
-      main_box);
+      harmony_combo_row);
 
   gtk_widget_class_bind_template_child (
       widget_class,
       HarmonyWindow,
-      harmony_drop_down);
+      wheel_container);
 }
 
 static void
@@ -128,9 +117,8 @@ harmony_window_init (HarmonyWindow *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 
   self->wheel = harmony_wheel_new ();
-
-  gtk_widget_set_size_request (GTK_WIDGET (self->wheel), 200, 200);
-  gtk_box_append (self->main_box, GTK_WIDGET (self->wheel));
+  gtk_widget_set_size_request (GTK_WIDGET (self->wheel), 260, 260);
+  gtk_box_append (self->wheel_container, GTK_WIDGET (self->wheel));
 
   g_signal_connect (
       self->picker_button,
@@ -139,7 +127,7 @@ harmony_window_init (HarmonyWindow *self)
       self);
 
   g_signal_connect (
-      self->harmony_drop_down,
+      self->harmony_combo_row,
       "notify::selected",
       G_CALLBACK (on_harmony_changed),
       self);
