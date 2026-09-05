@@ -26,9 +26,9 @@ G_DEFINE_FINAL_TYPE (
 
 static void
 harmony_wheel_set_property (GObject *object,
-                                guint prop_id,
-                                const GValue *value,
-                                GParamSpec *pspec)
+                            guint prop_id,
+                            const GValue *value,
+                            GParamSpec *pspec)
 {
   HarmonyWheel *self = HARMONY_WHEEL (object);
 
@@ -129,7 +129,7 @@ hue_to_gdk_rgba (HSLA hsla_color)
 
 static void
 harmony_wheel_snapshot (GtkWidget *widget,
-                            GtkSnapshot *snapshot)
+                        GtkSnapshot *snapshot)
 {
   HarmonyWheel *self =
       HARMONY_WHEEL (widget);
@@ -221,6 +221,71 @@ harmony_wheel_snapshot (GtkWidget *widget,
 }
 
 static void
+save_color_in_clipboard (GtkWidget *self, HSLA color)
+{
+  GdkDisplay *display = gtk_widget_get_display (GTK_WIDGET (self));
+  GdkClipboard *clipboard = gtk_widget_get_clipboard (self);
+  GdkRGBA rgba_color = hue_to_gdk_rgba (color);
+
+  if a
+
+  char *hex_string = g_strdup_printf ("#%02X%02X%02X%02X",
+                                      (int) round (rgba_color.red * 255.0),
+                                      (int) round (rgba_color.green * 255.0),
+                                      (int) round (rgba_color.blue * 255.0),
+                                      (int) round (rgba_color.alpha * 255.0));
+
+  gdk_clipboard_set_text (clipboard, hex_string);
+  g_free (hex_string);
+}
+
+static void
+on_click_pressed (GtkGestureClick *gesture,
+                  int n_press,
+                  double x,
+                  double y,
+                  gpointer user_data)
+{
+  HarmonyWheel *self = HARMONY_WHEEL (user_data);
+  GtkWidget *widget = GTK_WIDGET (self);
+
+  if (self->palette.count == 0)
+    {
+      return;
+    }
+  int width = gtk_widget_get_width (widget);
+  int height = gtk_widget_get_height (widget);
+
+  double center_y = width / 2.0;
+  double center_x = width / 2.0;
+  double radius = MIN (width, height) / 2.0;
+  double dx = x - center_x;
+  double dy = y - center_y;
+
+  if ((dx * dx + dy * dy) > (radius * radius))
+    {
+      return;
+    }
+  double angle = atan2 (dy, dx);
+  if (angle < 0)
+    {
+      angle += 2.0 * G_PI;
+    }
+  double slice_angle = 2.0 * G_PI / self->palette.count;
+  int index = (int) (angle / slice_angle);
+  if (index >= (int) self->palette.count)
+    {
+      index = self->palette.count - 1;
+    }
+  g_print ("Clicked slice: %d | Cor HSL: h=%.1f s=%.1f l=%.1f\n",
+           index,
+           self->palette.colors[index].h,
+           self->palette.colors[index].s,
+           self->palette.colors[index].l);
+  save_color_in_clipboard (widget, self->palette.colors[index]);
+}
+
+static void
 harmony_wheel_class_init (
     HarmonyWheelClass *klass)
 {
@@ -254,6 +319,10 @@ static void
 harmony_wheel_init (
     HarmonyWheel *self)
 {
+  GtkGesture *gesture = gtk_gesture_click_new ();
+  gtk_gesture_single_set_button (GTK_GESTURE_SINGLE (gesture), GDK_BUTTON_PRIMARY);
+  g_signal_connect (gesture, "pressed", G_CALLBACK (on_click_pressed), self);
+  gtk_widget_add_controller (GTK_WIDGET (self), GTK_EVENT_CONTROLLER (gesture));
 }
 
 void
@@ -288,3 +357,4 @@ harmony_wheel_new (void)
       HARMONY_TYPE_WHEEL,
       NULL);
 }
+
